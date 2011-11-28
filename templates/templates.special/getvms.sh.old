@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/usr/local/groundwork/nagios/libexec/check_esx3_gw.pl  -H $1 -C yinjicomm -l LIST |grep -oE '[^ ]*\(UP\)' |xargs |sed -e 's/(UP)//g' -e 's/ /|/g'
+
+

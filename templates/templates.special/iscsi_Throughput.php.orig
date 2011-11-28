@@ -1,0 +1,64 @@
+<?php
+#
+# This is a very basic static Template
+#
+#
+# Some Macros 
+$this->MACRO['TITLE'] = "ISCSI Ports Utilization for All ESX Servers"; 
+$this->MACRO['COMMENT'] = " ";
+
+$hosts = array('esx01', 'esx02', 'esx03', 'esx04', 'esx05', 'PS6000');
+
+$ds_name = array();
+$opt     = array();
+$def     = array();
+$def1    = array();
+$def2    = array();
+
+$i = 0;
+foreach($hosts as $key=>$host){
+    #
+    # get the data for a given Host/Service
+    #$services = $this->tplGetServices($host,"check_snmp_net_detail_esx");
+    switch ($host) {
+    case 'esx01':
+        $services = $this->tplGetServices('esx01','check_snmp_net_detail_esx_vmnic[02]');
+        break;
+    case 'esx02':
+        $services = $this->tplGetServices('esx02','check_snmp_net_detail_esx_vmnic[02]');
+        break;
+    case 'esx03':
+        $services = $this->tplGetServices('esx03','check_snmp_net_detail_esx_vmnic[02]');
+        break;
+    case 'esx04':
+        $services = $this->tplGetServices('esx04','check_snmp_net_detail_esx_vmnic[4567]');
+        break;
+    case 'esx05':
+        $services = $this->tplGetServices('esx05','check_snmp_net_detail_esx_vmnic[456]');
+        break;
+    case 'PS6000':
+        $services = $this->tplGetServices('PS6000','check_snmp_net_detail_ps6000_p[1234]');
+        break;
+    default:
+        #$services = $this->tplGetServices($host,"check_snmp_net_detail_esx");
+        ;
+    }
+    $ds_name[$i]  = $host . " ISCSI Ports";
+    $opt[$i]      = "--vertical-label \"bps\" -l0 --title \" \" --units-exponent=6 -u 500000000 ";
+    $def[$i]      = "";
+    $def1[$i]     = "";
+    $def2[$i]     = "";
+    foreach($services as $key=>$val){
+        $a = $this->tplGetData($val['host'],$val['service']);
+        $def1[$i]    .= rrd::def("a$key" ,$a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "AVERAGE");
+        $def1[$i]    .= rrd::line1("a$key", rrd::color(2), $a['MACRO']['SERVICEDESC'].'-'.'IN', "STACK");
+        $def1[$i]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
+        $def2[$i]    .= rrd::def("b$key" ,$a['DS'][2]['RRDFILE'], $a['DS'][2]['DS'], "AVERAGE");
+        $def2[$i]    .= rrd::line1("b$key", rrd::color(7), $a['MACRO']['SERVICEDESC'].'-'.'OUT', "STACK");
+        $def2[$i]    .= rrd::gprint("b$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
+    }
+    $def[$i] .= $def1[$i] . $def2[$i];
+    $i++;
+}
+
+?>

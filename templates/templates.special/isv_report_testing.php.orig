@@ -1,0 +1,51 @@
+<?php
+
+$this->MACRO['TITLE']   = "All ISVs Monthly Report";
+$this->MACRO['COMMENT'] = "";
+
+$fp = fopen("/tmp/debug.txt","w");
+
+#$hosts = array('vcsvr', 'netflow', 'isv9', 'isv10');
+#$hosts = $this->tplGetServices("isv","check_snmp_cpu|check_snmp_mem|check_snmp_dsk|check_snmp_port");
+$hosts = $this->getHosts();
+$new_hosts = array();
+foreach ($hosts as $host){
+    if(preg_match("/isv/", $host['name'])){
+        $new_hosts[] = $host['name'];
+    }
+}
+
+$ds_name = array();
+$opt     = array();
+$def     = array();
+
+$i=0;
+foreach ($new_hosts as $host) {
+    # CPU
+    $services = $this->tplGetServices($host,"check_snmp_cpu");
+    $ds_name[$i] = "CPU Utilization for " . $host;
+    $opt[$i]     = "--vertical-label \"Util(%)\" -l0 --title \" \" ";
+    $def[$i]     = "";
+    foreach($services as $key=>$val){
+        $a = $this->tplGetData($val['host'],$val['service']);
+        if(preg_match("/check_snmp_cpu_w/",$val['service'])) {
+            # cpu for windows host
+            $def[$i]    .= rrd::def("a$key", $a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "AVERAGE");
+#            $def[$i]    .= rrd::area("a$key", rrd::color(6), "cpu_util");
+            $def[$i]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
+        } else {
+            # cpu for linux host
+            $def[$i]    .= rrd::def("a$key", $a['DS'][3]['RRDFILE'], $a['DS'][3]['DS'], "AVERAGE");
+            $def[$i]    .= rrd::cdef("c$key", "100,a$key,-");
+#            $def[$i]    .= rrd::area("c$key", rrd::color(6), "cpu_util");
+            $def[$i]    .= rrd::gprint("c$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
+        }
+    }
+    fwrite($fp,$ds_name[$i]."\n");
+    fwrite($fp,$opt[$i]."\n");
+    fwrite($fp,$def[$i]."\n");
+    $i++;
+
+}
+fclose($fp);
+?>
