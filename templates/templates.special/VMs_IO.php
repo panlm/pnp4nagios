@@ -14,18 +14,24 @@ $color_list = array(
 $this->MACRO['TITLE'] = "All ISVs DISK IO Reports"; 
 $this->MACRO['COMMENT'] = " ";
 
+#$myFile = "/tmp/php.txt";
+#$fh = fopen($myFile, 'w') or die("can't open file");
+
 ###
 # linux io
 ###
 
+$h = array();
 $services = $this->tplGetServices("","check_snmp_iostat");
 $j = 0;
 foreach($services as $key=>$val){
     $a = $this->tplGetData($val['host'],$val['service']);
     $h[$j] = $a['MACRO']['HOSTNAME'];
+    #fwrite($fh, $h[$j]."\n");
     $j = $j + 1;
 }
 $hosts = array_unique($h);
+
 
 $i = 0;
 foreach($hosts as $key=>$host){
@@ -47,14 +53,18 @@ foreach($hosts as $key=>$host){
 # windows io
 ###
 
+$h = array();
 $services = $this->tplGetServices("","check_win_io");
 $j = 0;
 foreach($services as $key=>$val){
     $a = $this->tplGetData($val['host'],$val['service']);
     $h[$j] = $a['MACRO']['HOSTNAME'];
+    #fwrite($fh, $h[$j]."\n");
     $j = $j + 1;
 }
 $hosts = array_unique($h);
+
+#$hosts = array('VirtCenter2','ent12host1','ent12host2','ent19host1','ent3host1','ent7host1','isv16host1','isv16host2','isv16host3','isv18host1','isv36host3','isv44host2','vcsvr');
 
 $i = $i + 1;
 foreach($hosts as $key=>$host){
@@ -71,5 +81,7 @@ foreach($hosts as $key=>$host){
     }
     $i = $i + 1;
 }
+
+#fclose($fh);
 
 ?>
