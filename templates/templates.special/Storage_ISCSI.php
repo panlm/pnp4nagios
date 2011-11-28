@@ -18,7 +18,7 @@ $color_list = array(
     8 => "#336633"  // darker green
 );
 
-$hosts = array('esx01', 'esx02', 'esx03', 'esx04', 'esx05', 'PS6000');
+$hosts = array('esx01', 'esx02', 'esx03', 'esx04', 'PS6000');
 
 $ds_name = array();
 $opt     = array();
@@ -47,9 +47,6 @@ foreach($hosts as $key=>$host){
     case 'esx04':
         $services = $this->tplGetServices('esx04','check_snmp_port_vmnic[4567]');
         break;
-    case 'esx05':
-        $services = $this->tplGetServices('esx05','check_snmp_port_vmnic[456]');
-        break;
     case 'PS6000':
         $services = $this->tplGetServices('PS6000','check_snmp_port_p[1234]');
         break;
@@ -57,7 +54,7 @@ foreach($hosts as $key=>$host){
         ;
     }
     $ds_name[$i]  = $host . " ISCSI Ports";
-    $opt[$i]      = "--vertical-label \"bps\" --title \" \" --units-exponent=6 -u 100000000 -l \"-100000000\" -w 800 -h 200 ";
+    $opt[$i]      = "--vertical-label \"bps\" --title \" \" --units-exponent=6 -u 10000000 -l \"-10000000\" ";
     $def[$i]      = "";
     $def1[$i]     = "";
     $def2[$i]     = "";
@@ -111,7 +108,7 @@ foreach($hosts as $key=>$host){
 }
 
 $ds_name[$i]  = "All ESXs ISCSI Ports";
-$opt[$i]      = "--vertical-label \"bps\" --title \" \" --units-exponent=6 -u 100000000 -l \"-100000000\" -w 800 -h 200 ";
+$opt[$i]      = "--vertical-label \"bps\" --title \" \" --units-exponent=6 -u 10000000 -l \"-10000000\" ";
 $def[$i] = "";
 foreach($def3 as $key=>$val){
     $def[$i] .= $val;
