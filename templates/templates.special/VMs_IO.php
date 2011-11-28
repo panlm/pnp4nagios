@@ -1,41 +1,75 @@
 <?php
-#
-# This is a very basic static Template
-#
-#
-# Some Macros 
+
+$color_list = array(
+    0 => "#ff6600", // Orange
+    1 => "#007dd0", // Blue
+    2 => "#ff77ee", // Purple
+    3 => "#fed409", // Yellow
+    4 => "#ee0a04", // Red
+    5 => "#56a901", // Green
+    6 => "#336633", // darker green
+    7 => "#a4a4a4"  // Grey
+);
+
 $this->MACRO['TITLE'] = "All ISVs DISK IO Reports"; 
 $this->MACRO['COMMENT'] = " ";
 
+###
+# linux io
+###
+
 $services = $this->tplGetServices("","check_snmp_iostat");
-
-#
-# The Name of this Datasource (ds)
-
-$i = 0;
+$j = 0;
 foreach($services as $key=>$val){
     $a = $this->tplGetData($val['host'],$val['service']);
-    $ds_name[$i] = $a['MACRO']['HOSTNAME'];
-    $opt[$i]     = "--vertical-label \"\" -l0 --title \" \" ";
+    $h[$j] = $a['MACRO']['HOSTNAME'];
+    $j = $j + 1;
+}
+$hosts = array_unique($h);
+
+$i = 0;
+foreach($hosts as $key=>$host){
+    $services    = $this->tplGetServices($host,"check_snmp_iostat");
+    $ds_name[$i] = $host;
+    $opt[$i]     = "--vertical-label \"\" -l0 --title \" \" -u 100 ";
     $def[$i]     = "";
-    #
-    # get the data for a given Host/Service
-    #
-    # Throw an exception to debug the content of $a
-    # Just to get Infos about the Array Structure
-    #
-    #throw new Kohana_exception(print_r($a,TRUE));
-    $def[$i]    .= rrd::def("a$key" ,$a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "MAX");
-    $def[$i]    .= rrd::line2("a$key", "#CCCC33", "tps");
-    $def[$i]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
-    $def[$i]    .= rrd::def("b$key" ,$a['DS'][1]['RRDFILE'], $a['DS'][1]['DS'], "MAX");
-    $def[$i]    .= rrd::line2("b$key", "#FF0000", "readKB");
-    $def[$i]    .= rrd::gprint("b$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
-    $def[$i]    .= rrd::def("d$key" ,$a['DS'][2]['RRDFILE'], $a['DS'][2]['DS'], "MAX");
-    $def[$i]    .= rrd::line2("d$key", "#336666", "writeKB");
-    $def[$i]    .= rrd::gprint("d$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
+    foreach($services as $key=>$val){
+        $a = $this->tplGetData($val['host'],$val['service']);
+        $def[$i]    .= rrd::def("a$key" ,$a['DS'][10]['RRDFILE'], $a['DS'][10]['DS'], "AVERAGE");
+        $def[$i]    .= rrd::area("a$key", $color_list[$key]."32");
+        $def[$i]    .= rrd::line1("a$key", $color_list[$key]."FF", ereg_replace(".*_","",$a['MACRO']['SERVICEDESC'])."-util%");
+        $def[$i]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
+    }
     $i = $i + 1;
 }
 
+###
+# windows io
+###
+
+$services = $this->tplGetServices("","check_win_io");
+$j = 0;
+foreach($services as $key=>$val){
+    $a = $this->tplGetData($val['host'],$val['service']);
+    $h[$j] = $a['MACRO']['HOSTNAME'];
+    $j = $j + 1;
+}
+$hosts = array_unique($h);
+
+$i = $i + 1;
+foreach($hosts as $key=>$host){
+    $services    = $this->tplGetServices($host,"check_win_io");
+    $ds_name[$i] = $host;
+    $opt[$i]     = "--vertical-label \"\" -l0 --title \" \" -u 100 ";
+    $def[$i]     = "";
+    foreach($services as $key=>$val){
+        $a = $this->tplGetData($val['host'],$val['service']);
+        $def[$i]    .= rrd::def("a$key" ,$a['DS'][1]['RRDFILE'], $a['DS'][1]['DS'], "AVERAGE");
+        $def[$i]    .= rrd::area("a$key", $color_list[$key]."32");
+        $def[$i]    .= rrd::line1("a$key", $color_list[$key]."FF", ereg_replace(".*_","",$a['MACRO']['SERVICEDESC'])."-util%");
+        $def[$i]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
+    }
+    $i = $i + 1;
+}
 
 ?>
