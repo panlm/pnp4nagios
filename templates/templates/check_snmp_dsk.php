@@ -1,19 +1,22 @@
 <?php
-#
-# Copyright (c) 2006-2010 Joerg Linge (http://www.pnp4nagios.org)
-# Plugin: check_load
-#
-# Disk
-#
+# EMPTY GRAPH
+if ( ! preg_match("/(check_snmp_dsk_root|check_snmp_dsk_c)/",$servicedesc) ) {
+    $ds_name[0] = "ignore"; 
+    $opt[0]     = "--vertical-label \" \" -l0 --title \" \" ";
+    $def[0]     = "";
+    $def[0] .= rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
+    $def[0] .= rrd::cdef("cvar1", "var1,0,*");
+    $def[0] .= rrd::line1("cvar1", rrd::color(2), "ignore") ;
+    $def[0] .= rrd::gprint("cvar1", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
+    $def[0] .= rrd::comment(" ignore \\r");
+    return;
+}
+
 $services = $this->tplGetServices($hostname,"check_snmp_dsk");
 
 $ds_name[3] = "";
 $opt[3]     = "";
 $def[3]     = "";
-
-if ( ! preg_match("/(check_snmp_dsk_root|check_snmp_dsk_c)/",$servicedesc) ) {
-    return;
-}
 
 $ds_name[3] = $hostname . " File Systems";
 $opt[3]     = "--vertical-label \"Util(%)\" -l0 --title \"$ds_name[3] \" -u 100 ";
