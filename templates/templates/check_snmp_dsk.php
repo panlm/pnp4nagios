@@ -1,14 +1,14 @@
 <?php
 # EMPTY GRAPH
 if ( ! preg_match("/(check_snmp_dsk_root|check_snmp_dsk_c)/",$servicedesc) ) {
-    $ds_name[0] = "ignore"; 
-    $opt[0]     = "--vertical-label \" \" -l0 --title \" \" ";
+    $ds_name[0] = "SEE GRAPH ABOVE";
+    $opt[0]     = "--vertical-label \" \" -l0 --title \" SEE GRAPH ABOVE \" -h 10 ";
     $def[0]     = "";
     $def[0] .= rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
     $def[0] .= rrd::cdef("cvar1", "var1,0,*");
-    $def[0] .= rrd::line1("cvar1", rrd::color(2), "ignore") ;
+    $def[0] .= rrd::line1("cvar1", rrd::color(2), "SEE GRAPH ABOVE") ;
     $def[0] .= rrd::gprint("cvar1", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
-    $def[0] .= rrd::comment(" ignore \\r");
+    $def[0] .= rrd::comment(" SEE GRAPH ABOVE \\r");
     return;
 }
 
@@ -38,7 +38,7 @@ foreach($services as $key=>$val){
     $def[4]    .= rrd::def("b$key" ,$a['DS'][1]['RRDFILE'], $a['DS'][1]['DS'], "AVERAGE");
     $def[4]    .= rrd::line2("a$key", rrd::color($key+2), ereg_replace(".*_","",$a['MACRO']['SERVICEDESC']).'-total');
     $def[4]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
-    $def[4]    .= rrd::line2("b$key", rrd::color($key+2), ereg_replace(".*_","",$a['MACRO']['SERVICEDESC']).'-used');
+    $def[4]    .= rrd::line1("b$key", rrd::color($key+2), ereg_replace(".*_","",$a['MACRO']['SERVICEDESC']).'-used');
     $def[4]    .= rrd::gprint("b$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
 }
 
