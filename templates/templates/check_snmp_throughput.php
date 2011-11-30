@@ -1,5 +1,4 @@
 <?php
-
 # EMPTY GRAPH
 if ( ! preg_match("/check_snmp_throughput_ct/",$servicedesc) ) {
     $ds_name[0] = "ignore"; 
