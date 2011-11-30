@@ -1,17 +1,24 @@
 <?php
-#
-# This is a very basic static Template
-#
-#
+
+# EMPTY GRAPH
+if ( ! preg_match("/check_snmp_throughput_ct/",$servicedesc) ) {
+    $ds_name[0] = "ignore"; 
+    $opt[0]     = "--vertical-label \" \" -l0 --title \" \" ";
+    $def[0]     = "";
+    $def[0] .= rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
+    $def[0] .= rrd::cdef("cvar1", "var1,0,*");
+    $def[0] .= rrd::line1("cvar1", rrd::color(2), "ignore") ;
+    $def[0] .= rrd::gprint("cvar1", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
+    $def[0] .= rrd::comment(" ignore \\r");
+    return;
+}
+
 # Some Macros 
 $this->MACRO['TITLE'] = "Top 5 ISVs Connections"; 
 $this->MACRO['COMMENT'] = " ";
 
 $services = $this->tplGetServices("$hostname","check_snmp_throughput_c[tu]");
 
-if ( preg_match("/check_snmp_throughput_ct/",$servicedesc) ) {
-
-#
 # The Name of this Datasource (ds)
 $ds_name[0] = "Internet In"; 
 $opt[0]     = "--vertical-label \"Connections\" -l0 --title \" \" ";
@@ -43,24 +50,6 @@ foreach($services as $key=>$val){
     $def[2]    .= rrd::def("a$key" ,$a['DS'][2]['RRDFILE'], $a['DS'][2]['DS'], "AVERAGE");
     $def[2]    .= rrd::line2("a$key", rrd::color($key), ereg_replace(".*_","",$a['MACRO']['SERVICEDESC']));
     $def[2]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
-}
-
-} else {
-
-#$services = $this->tplGetServices("$hostname","$servicedesc");
-
-$ds_name[0] = "ignore"; 
-$opt[0]     = "--vertical-label \" \" -l0 --title \" \" ";
-$def[0]     = "";
-
-#throw new Kohana_exception(print_r($services,TRUE));
-
-$def[0] .= rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
-$def[0] .= rrd::cdef("cvar1", "var1,0,*");
-$def[0] .= rrd::line1("cvar1", rrd::color(2), "ignore") ;
-$def[0] .= rrd::gprint("cvar1", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
-$def[0] .= rrd::comment(" ignore \\r");
-
 }
 
 ?>
