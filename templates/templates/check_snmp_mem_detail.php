@@ -31,21 +31,25 @@ $def[1]     = "";
 
 $opt[1] .= "--vertical-label Size(GB) -l0  --title \"Memory Usage for $hostname\" --units-exponent=0 ";
 
-#$def[1] .= rrd::def("var3", $RRDFILE[1], $DS[3], "AVERAGE");
+$def[1] .= rrd::def("var3", $RRDFILE[1], $DS[3], "AVERAGE");
 $def[1] .= rrd::def("var4", $RRDFILE[1], $DS[4], "AVERAGE");
 $def[1] .= rrd::def("var5", $RRDFILE[1], $DS[5], "AVERAGE");
 $def[1] .= rrd::def("var6", $RRDFILE[1], $DS[6], "AVERAGE");
 $def[1] .= rrd::def("var7", $RRDFILE[1], $DS[7], "AVERAGE");
+$def[1] .= rrd::cdef("var8", "var3,var4,-,var5,-,var6,-,var7,-");
 
 #$def[1] .= rrd::cdef("cvar3", "var3,1024,/,1024,/");
 $def[1] .= rrd::cdef("cvar4", "var4,1024,/,1024,/");
 $def[1] .= rrd::cdef("cvar5", "var5,1024,/,1024,/");
 $def[1] .= rrd::cdef("cvar6", "var6,1024,/,1024,/");
 $def[1] .= rrd::cdef("cvar7", "var7,1024,/,1024,/");
+$def[1] .= rrd::cdef("cvar8", "var8,1024,/,1024,/");
 
-#$def[1] .= rrd::area("cvar3", rrd::color(3), "TotalMem") ;
+#$def[1] .= rrd::area("cvar3", rrd::color(3), "Total") ;
 #$def[1] .= rrd::gprint("cvar3", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
-$def[1] .= rrd::area("cvar5", rrd::color(1), "Shared") ;
+$def[1] .= rrd::area("cvar8", rrd::color(3), "App") ;
+$def[1] .= rrd::gprint("cvar8", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
+$def[1] .= rrd::area("cvar5", rrd::color(1), "Shared", "STACK") ;
 $def[1] .= rrd::gprint("cvar5", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
 $def[1] .= rrd::area("cvar6", rrd::color(6), "Buffer", "STACK") ;
 $def[1] .= rrd::gprint("cvar6", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
