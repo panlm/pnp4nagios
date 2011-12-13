@@ -70,11 +70,11 @@ $def[2] .= rrd::def("var1", $RRDFILE[1], $DS[8], "AVERAGE");
 $def[2] .= rrd::def("var2", $RRDFILE[1], $DS[9], "AVERAGE");
 $def[2] .= rrd::def("var3", $RRDFILE[1], $DS[10], "AVERAGE");
 
-$def[2] .= rrd::line2("var1", rrd::color(9), "memutil") ;
+$def[2] .= rrd::line2("var1", rrd::color(2), "memutil") ;
 $def[2] .= rrd::gprint("var1", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
-$def[2] .= rrd::line2("var2", rrd::color(10), "actutil") ;
+$def[2] .= rrd::line2("var2", rrd::color(3), "actutil") ;
 $def[2] .= rrd::gprint("var2", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
-$def[2] .= rrd::line2("var3", rrd::color(11), "swaputil") ;
+$def[2] .= rrd::line2("var3", rrd::color(6), "swaputil") ;
 $def[2] .= rrd::gprint("var3", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
 $def[2] .= rrd::comment(" (NO STACKED GRAPH)\\r");
 
