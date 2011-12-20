@@ -385,7 +385,7 @@ foreach ($DS as $i) {
         $def[$defcnt] .= "AREA:sps#$now:\" \" ";
         $def[$defcnt] .= "VDEF:vsps=sps,LAST " ;
         $def[$defcnt] .= "GPRINT:vsps:\"%3.2lf Created threads per second \\n\" ";
-        }
+    }
     if(preg_match('/^connects_aborted_per_sec$/', $NAME[$i])) {
         $ds_name[$defcnt] = "Aborted Connects per second";
         $opt[$defcnt] = "--vertical-label \"Aborted connects / sec\" --title \"Aborted Connects per second on $hostname\" ";
@@ -394,7 +394,17 @@ foreach ($DS as $i) {
         $def[$defcnt] .= "AREA:sps#$now:\" \" ";
         $def[$defcnt] .= "VDEF:vsps=sps,LAST " ;
         $def[$defcnt] .= "GPRINT:vsps:\"%3.2lf Aborted Connects per second \\n\" ";
-        }
+    }
+    if(preg_match('/^slave_lag$/', $NAME[$i])) {
+        $ds_name[$defcnt] = "slave-lag";
+        $opt[$defcnt] = "--vertical-label \"(sec)\" --title \"Seconds behind master on $hostname\" ";
+        $def[$defcnt] = "";
+        $def[$defcnt] .= "DEF:lag=$RRDFILE[$i]:$DS[$i]:AVERAGE:reduce=LAST " ;
+        $def[$defcnt] .= "AREA:lag#111111 ";
+        $def[$defcnt] .= "VDEF:vlag=lag,LAST " ;
+        $def[$defcnt] .= "GPRINT:vlag:\"%.0lf (sec) \" " ;
+        $defcnt++;
+    }
 }
 ?>
 
