@@ -36,7 +36,7 @@ $def[1] .= rrd::def("var4", $RRDFILE[1], $DS[4], "AVERAGE");
 #$def[1] .= rrd::def("var5", $RRDFILE[1], $DS[5], "AVERAGE");
 $def[1] .= rrd::def("var6", $RRDFILE[1], $DS[6], "AVERAGE");
 $def[1] .= rrd::def("var7", $RRDFILE[1], $DS[7], "AVERAGE");
-$def[1] .= rrd::cdef("var8", "var3,var4,-,var5,-,var6,-,var7,-");
+$def[1] .= rrd::cdef("var8", "var3,var4,-,var6,-,var7,-");
 
 #$def[1] .= rrd::cdef("cvar3", "var3,1024,/,1024,/");
 $def[1] .= rrd::cdef("cvar4", "var4,1024,/,1024,/");
