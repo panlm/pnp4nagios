@@ -17,7 +17,7 @@ $def[0] .= rrd::gprint("var1", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
 $def[0] .= rrd::line2("var2", rrd::color(3), "SwapOut") ;
 $def[0] .= rrd::gprint("var2", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
 $def[0] .= rrd::comment("\\r");
-$def[0] .= rrd::comment("The average amount of memory swapped in from / out to disk\\l");
+$def[0] .= rrd::comment("The average amount of memory swapped in from / out to disk (last minute)\\l");
 
 #
 $ds_name[1] = "SWAP Usage";
