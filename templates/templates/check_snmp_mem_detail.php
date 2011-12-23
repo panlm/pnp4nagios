@@ -7,7 +7,7 @@ $ds_name[0] = "SWAP Usage";
 $opt[0]     = "";
 $def[0]     = "";
 
-$opt[0] .= "--vertical-label \"Size(GB)\" -l0  --title \"SWAP Usage for $hostname\" --units-exponent=0 ";
+$opt[0] .= "--vertical-label \"Size(GB)\" -l0  --title \"$ds_name[0] for $hostname\" --units-exponent=0 ";
 
 $def[0] .= rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
 $def[0] .= rrd::def("var2", $RRDFILE[1], $DS[2], "AVERAGE");
@@ -29,7 +29,7 @@ $ds_name[1] = "Memory Usage";
 $opt[1]     = "";
 $def[1]     = "";
 
-$opt[1] .= "--vertical-label Size(GB) -l0  --title \"Memory Usage for $hostname\" --units-exponent=0 ";
+$opt[1] .= "--vertical-label Size(GB) -l0  --title \"$ds_name[1] for $hostname\" --units-exponent=0 ";
 
 $def[1] .= rrd::def("var3", $RRDFILE[1], $DS[3], "AVERAGE");
 $def[1] .= rrd::def("var4", $RRDFILE[1], $DS[4], "AVERAGE");
@@ -64,7 +64,7 @@ $ds_name[2] = "Memory Utilization";
 $opt[2]     = "";
 $def[2]     = "";
 
-$opt[2] .= "--vertical-label \"Percent(%)\" -l0  --title \"Memory Utilization for $hostname\" ";
+$opt[2] .= "--vertical-label \"Percent(%)\" -l0  --title \"$ds_name[2] for $hostname\" ";
 
 $def[2] .= rrd::def("var1", $RRDFILE[1], $DS[8], "AVERAGE");
 $def[2] .= rrd::def("var2", $RRDFILE[1], $DS[9], "AVERAGE");
