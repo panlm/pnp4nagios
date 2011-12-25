@@ -7,7 +7,7 @@ $ds_name[0] = "request merged";
 $opt[0]     = "";
 $def[0]     = "";
 
-$opt[0] .= "--vertical-label \"\" -l0  --title \"$ds_name[0] for $hostname\" ";
+$opt[0] .= "--vertical-label \"\" -l0  --title \"$ds_name[0] for $hostname\" --units-exponent=0 ";
 
 $def[0] .= rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
 $def[0] .= rrd::def("var2", $RRDFILE[1], $DS[2], "AVERAGE");
@@ -25,7 +25,7 @@ $ds_name[1] = "read/write requests";
 $opt[1]     = "";
 $def[1]     = "";
 
-$opt[1] .= "--vertical-label \"\" -l0  --title \"$ds_name[1] for $hostname\" ";
+$opt[1] .= "--vertical-label \"\" -l0  --title \"$ds_name[1] for $hostname\" --units-exponent=0 ";
 
 $def[1] .= rrd::def("var3", $RRDFILE[1], $DS[3], "AVERAGE");
 $def[1] .= rrd::def("var4", $RRDFILE[1], $DS[4], "AVERAGE");
@@ -42,7 +42,7 @@ $ds_name[2] = "read/write kilobytes";
 $opt[2]     = "";
 $def[2]     = "";
 
-$opt[2] .= "--vertical-label \"\" -l0  --title \"$ds_name[2] for $hostname\" ";
+$opt[2] .= "--vertical-label \"\" -l0  --title \"$ds_name[2] for $hostname\" --units-exponent=0 ";
 
 $def[2] .= rrd::def("var5", $RRDFILE[1], $DS[5], "AVERAGE");
 $def[2] .= rrd::def("var6", $RRDFILE[1], $DS[6], "AVERAGE");
@@ -59,7 +59,7 @@ $ds_name[3] = "average request size";
 $opt[3]     = "";
 $def[3]     = "";
 
-$opt[3] .= "--vertical-label \"\" -l0  --title \"$ds_name[3] for $hostname\" ";
+$opt[3] .= "--vertical-label \"\" -l0  --title \"$ds_name[3] for $hostname\" --units-exponent=0 ";
 
 $def[3] .= rrd::def("var7", $RRDFILE[1], $DS[7], "AVERAGE");
 
@@ -73,7 +73,7 @@ $ds_name[4] = "average queue size";
 $opt[4]     = "";
 $def[4]     = "";
 
-$opt[4] .= "--vertical-label \"\" -l0  --title \"$ds_name[4] for $hostname\" ";
+$opt[4] .= "--vertical-label \"\" -l0  --title \"$ds_name[4] for $hostname\" --units-exponent=0 ";
 
 $def[4] .= rrd::def("var8", $RRDFILE[1], $DS[8], "AVERAGE");
 
@@ -87,7 +87,7 @@ $ds_name[5] = "await time";
 $opt[5]     = "";
 $def[5]     = "";
 
-$opt[5] .= "--vertical-label \"\" -l0  --title \"$ds_name[5] for $hostname\" ";
+$opt[5] .= "--vertical-label \"\" -l0  --title \"$ds_name[5] for $hostname\" --units-exponent=0 ";
 
 $def[5] .= rrd::def("var9", $RRDFILE[1], $DS[9], "AVERAGE");
 
@@ -103,7 +103,7 @@ $ds_name[6] = "service time";
 $opt[6]     = "";
 $def[6]     = "";
 
-$opt[6] .= "--vertical-label \"\" -l0  --title \"$ds_name[6] for $hostname\" ";
+$opt[6] .= "--vertical-label \"\" -l0  --title \"$ds_name[6] for $hostname\" --units-exponent=0 ";
 
 $def[6] .= rrd::def("var10", $RRDFILE[1], $DS[10], "AVERAGE");
 
@@ -118,7 +118,7 @@ $ds_name[7] = "device utilization";
 $opt[7]     = "";
 $def[7]     = "";
 
-$opt[7] .= "--vertical-label \"\" -l0  --title \"$ds_name[7] for $hostname\" ";
+$opt[7] .= "--vertical-label \"\" -l0  --title \"$ds_name[7] for $hostname\" --units-exponent=0 ";
 
 $def[7] .= rrd::def("var11", $RRDFILE[1], $DS[11], "AVERAGE");
 
