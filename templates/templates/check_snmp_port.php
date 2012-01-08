@@ -6,7 +6,7 @@
 # Network Bandwidth
 #
 $ds_name[1] = "In/Out";
-$opt[1] = "--vertical-label Throughput(bps) -l0  --title \"Network Throughput for $hostname\" ";
+$opt[1] = "--vertical-label \"(bps)\" -l0 --title \"Network Throughput for $hostname\" --base=1000 ";
 
 $def[1] = rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
 $def[1] .= rrd::def("var2", $RRDFILE[1], $DS[2], "AVERAGE");
@@ -21,7 +21,7 @@ $def[1] .= rrd::comment(" (NO STACKED GRAPH)\\r");
 # Network Utilization
 #
 $ds_name[2] = "InPct/OutPct";
-$opt[2] = "--vertical-label Percent(%) -l0  --title \"Network Utilization for $hostname\" ";
+$opt[2] = "--vertical-label \"(%)\" -l0  --title \"Network Utilization for $hostname\" ";
 
 $def[2] = rrd::def("var3", $RRDFILE[1], $DS[3], "AVERAGE");
 $def[2] .= rrd::def("var4", $RRDFILE[1], $DS[4], "AVERAGE");
