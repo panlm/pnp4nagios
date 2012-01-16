@@ -52,7 +52,7 @@ if(preg_match("/memory/i", $NAME[1])) {
             $ds_name[0] = "default";
         }
     } else {
-        $ds_name[0] = str_replace("_","/",$NAME[1]);
+        $ds_name[0] = str_replace("_","/",preg_replace("/__[^_]*$/","",$NAME[1]));
     }
     $opt[0]    .= "--vertical-label \"(byte)\" -l0 --title \"$ds_name[0] ($MAX[1]MB) for $hostname\" " . $myopt ;
     $def[0]    .= rrd::def("cvar1", $RRDFILE[1], $DS[1], "AVERAGE");
