@@ -5,8 +5,8 @@
 #
 # CPU Utilization
 #
-$ds_name[1] = "CPU Extension Collection";
-$opt[1] = "--vertical-label Percent(%) -l0  --title \"CPU Utilization for $hostname / $servicedesc\" ";
+$ds_name[1] = "CPU Utilization";
+$opt[1] = "--vertical-label \"(%)\" -l0 --title \"$ds_name[1] for $hostname (STACK) \" -Y --upper-limit 100 --rigid ";
 
 $def[1] = rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
 $def[1] .= rrd::def("var2", $RRDFILE[1], $DS[2], "AVERAGE");
@@ -30,13 +30,13 @@ $def[1] .= rrd::area("var5", rrd::color(6), "Wait", "STACK") ;
 $def[1] .= rrd::gprint("var5", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
 $def[1] .= rrd::area("var4", rrd::color(7), "Idle", "STACK") ;
 $def[1] .= rrd::gprint("var4", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
-$def[1] .= rrd::comment(" (STACKED GRAPH)\\r");
+$def[1] .= rrd::comment(" ($servicedesc)\\r");
 
 #
 # CPU Utilization
 #
-$ds_name[2] = "CPU Extension Collection";
-$opt[2] = "--vertical-label Percent(%) -l0  --title \"CPU Utilization (No CPU Idle) for $hostname / $servicedesc\" ";
+$ds_name[2] = "CPU Utilization";
+$opt[2] = "--vertical-label \"(%)\" -l0 --title \"$ds_name[2] (No CPU Idle) for $hostname (STACK)\" ";
 
 $def[2] = rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
 $def[2] .= rrd::def("var2", $RRDFILE[1], $DS[2], "AVERAGE");
@@ -60,6 +60,6 @@ $def[2] .= rrd::area("var5", rrd::color(6), "Wait", "STACK") ;
 $def[2] .= rrd::gprint("var5", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
 #$def[2] .= rrd::area("var4", rrd::color(7), "Idle", "STACK") ;
 #$def[2] .= rrd::gprint("var4", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
-$def[2] .= rrd::comment(" (STACKED GRAPH)\\r");
+$def[2] .= rrd::comment(" ($servicedesc)\\r");
 
 ?>
