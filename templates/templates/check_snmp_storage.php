@@ -17,21 +17,21 @@ if ($MAX[1] != "") {
 if(preg_match("/memory/i", $NAME[1])) {
     $ds_name[0] = "Physical Memory";
     $pct        = number_format($ACT[1] / $MAX[1] * 100,2);
-    $opt[0]    .= "--vertical-label \"(byte)\" -l0 --title \"$ds_name[0] (Used:$pct%) for $hostname\" " . $myopt ;
+    $opt[0]    .= "--vertical-label \"(byte)\" --title \"$ds_name[0] (Used:$pct%) for $hostname\" " . $myopt ;
     $def[0]    .= rrd::def("cvar1", $RRDFILE[1], $DS[1], "AVERAGE");
     $def[0]    .= rrd::cdef("var1", "cvar1,1024,*,1024,*");
     $def[0]    .= rrd::line2("var1", rrd::color(2), "Used(".$UNIT[1].") ") ;
     $def[0]    .= rrd::gprint("cvar1", array("MIN", "AVERAGE", "MAX"), "%6.2lf");
-    $def[0]    .= rrd::comment("  Total    - ".$MAX[1]." ".$UNIT[1]."   ");
+    $def[0]    .= rrd::comment("Total\: ".$MAX[1].$UNIT[1]."  ");
     if ($WARN[1] != "") {
         $warn = $WARN[1] * 1024 * 1024 ;
         $warnpct = number_format($WARN[1] / $MAX[1] * 100,0);
-        $def[0]    .= rrd::hrule($warn, "#FF8c00", "Warning  - ".$WARN[1]." ".$UNIT[1]." ".$warnpct."%   ");
+        $def[0]    .= rrd::hrule($warn, "#FF8c00", "Warning\: ".$WARN[1].$UNIT[1]." ".$warnpct."%  ");
     }
     if ($CRIT[1] != "") {
         $crit = $CRIT[1] * 1024 * 1024 ;
         $critpct = number_format($CRIT[1] / $MAX[1] * 100,0);
-        $def[0]    .= rrd::hrule($crit, "#FF0000", "Critical - ".$CRIT[1]." ".$UNIT[1]." ".$critpct."%   ");
+        $def[0]    .= rrd::hrule($crit, "#FF0000", "Critical\: ".$CRIT[1].$UNIT[1]." ".$critpct."%  ");
     }
 } elseif ( preg_match("/^[CDEF_].*/", $NAME[1]) ) {
     if ( preg_match("/^_vmfs_volumes_/", $NAME[1]) ) {
@@ -59,21 +59,21 @@ if(preg_match("/memory/i", $NAME[1])) {
         $ds_name[0] = str_replace("_","/",preg_replace("/__[^_]*$/","",$NAME[1]));
     }
     $pct        = number_format($ACT[1] / $MAX[1] * 100,2);
-    $opt[0]    .= "--vertical-label \"(byte)\" -l0 --title \"$ds_name[0] (Used:$pct%) for $hostname\" " . $myopt ;
+    $opt[0]    .= "--vertical-label \"(byte)\" --title \"$ds_name[0] (Used:$pct%) for $hostname\" " . $myopt ;
     $def[0]    .= rrd::def("cvar1", $RRDFILE[1], $DS[1], "AVERAGE");
     $def[0]    .= rrd::cdef("var1", "cvar1,1024,*,1024,*");
     $def[0]    .= rrd::line2("var1", rrd::color(3), "Used(MB)") ;
     $def[0]    .= rrd::gprint("cvar1", array("MIN", "AVERAGE", "MAX"), "%6.2lf");
-    $def[0]    .= rrd::comment("  Total    - ".$MAX[1]." ".$UNIT[1]."   ");
+    $def[0]    .= rrd::comment("Total\: ".$MAX[1].$UNIT[1]."  ");
     if ($WARN[1] != "") {
         $warn = $WARN[1] * 1024 * 1024 ;
         $warnpct = number_format($WARN[1] / $MAX[1] * 100,0);
-        $def[0]    .= rrd::hrule($warn, "#FF8c00", "Warning  - ".$WARN[1]." ".$UNIT[1]." ".$warnpct."%   ");
+        $def[0]    .= rrd::hrule($warn, "#FF8c00", "Warning\: ".$WARN[1].$UNIT[1]." ".$warnpct."%  ");
     }
     if ($CRIT[1] != "") {
         $crit = $CRIT[1] * 1024 * 1024 ;
         $critpct = number_format($CRIT[1] / $MAX[1] * 100,0);
-        $def[0]    .= rrd::hrule($crit, "#FF0000", "Critical - ".$CRIT[1]." ".$UNIT[1]." ".$critpct."%   ");
+        $def[0]    .= rrd::hrule($crit, "#FF0000", "Critical\: ".$CRIT[1].$UNIT[1]." ".$critpct."%  ");
     }
 } else {
 
