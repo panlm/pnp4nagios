@@ -56,7 +56,7 @@ if(preg_match("/memory/i", $NAME[1])) {
             $ds_name[0] = "default";
         }
     } else {
-        $ds_name[0] = str_replace("_","/",preg_replace("/__[^_]*$/","",$NAME[1]));
+        $ds_name[0] = str_replace("_","/",preg_replace("/___.*$/","",$NAME[1]));
     }
     $pct        = number_format($ACT[1] / $MAX[1] * 100,2);
     $opt[0]    .= "--vertical-label \"(byte)\" --title \"$ds_name[0] (Used:$pct%) for $hostname\" " . $myopt ;
