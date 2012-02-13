@@ -1,47 +1,27 @@
 <?php
-# EMPTY GRAPH
-if ( ! preg_match("/(check_snmp_dsk_root|check_snmp_dsk_c)/",$servicedesc) ) {
-    $ds_name[0] = "This is a empty graph";
-    $opt[0]     = "--vertical-label \" \" -l0 --title \" This is a empty graph \" -h 10 ";
-    $def[0]     = "";
-    $def[0] .= rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
-    $def[0] .= rrd::cdef("cvar1", "var1,0,*");
-    $def[0] .= rrd::line1("cvar1", rrd::color(2), "This is a empty graph") ;
-    $def[0] .= rrd::gprint("cvar1", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
-    $def[0] .= rrd::comment(" This is a empty graph \\r");
-    return;
-}
-
-$services = $this->tplGetServices($hostname,"check_snmp_dsk");
-
 $ds_name[3] = "";
 $opt[3]     = "";
 $def[3]     = "";
 
-$ds_name[3] = $hostname . " File Systems";
+#preg_replace('/^F(\d+)$/', 'Probe $1', $label)
+
+$ds_name[3] = " File Systems: " . preg_replace('/check_snmp_dsk_/', '', $NAGIOS_SERVICEDESC);
 $opt[3]     = "--vertical-label \"Util(%)\" -l0 --title \"$ds_name[3] \" -u 100 ";
 $def[3]     = "";
-foreach($services as $key=>$val){
-    $a = $this->tplGetData($val['host'],$val['service']);
-    $def[3]    .= rrd::def("a$key" ,$a['DS'][2]['RRDFILE'], $a['DS'][2]['DS'], "AVERAGE");
-    #$def[3]    .= rrd::line2("a$key", rrd::color($key), $a['MACRO']['HOSTNAME'].'-'.$a['MACRO']['SERVICEDESC']);
-    $def[3]    .= rrd::line2("a$key", rrd::color($key+2), ereg_replace(".*_","",$a['MACRO']['SERVICEDESC']));
-    $def[3]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
-}
+$def[3]    .= rrd::def("a$key" ,$RRDFILE[1], $DS[3], "AVERAGE");
+$def[3]    .= rrd::line2("a$key", rrd::color($key+2), "util");
+$def[3]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
 
-$ds_name[4] = $hostname . " File Systems";
-$opt[4]     = "--vertical-label \" Size(GB) \" -l0 --title \"$ds_name[3] \" -u 100 --units-exponent=0 ";
+$ds_name[4] = $ds_name[3];
+$opt[4]     = "--vertical-label \" Size(GB) \" -l0 --title \"$ds_name[4] \" -u 100 --units-exponent=0 ";
 $def[4]     = "";
-foreach($services as $key=>$val){
-    $a = $this->tplGetData($val['host'],$val['service']);
-    $def[4]    .= rrd::def("a$key" ,$a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "AVERAGE");
-    $def[4]    .= rrd::def("b$key" ,$a['DS'][1]['RRDFILE'], $a['DS'][1]['DS'], "AVERAGE");
-    $def[4]    .= rrd::cdef("ca$key", "a$key,1024,/");
-    $def[4]    .= rrd::cdef("cb$key", "b$key,1024,/");
-    $def[4]    .= rrd::line2("ca$key", rrd::color($key+2), ereg_replace(".*_","",$a['MACRO']['SERVICEDESC']).'-total');
-    $def[4]    .= rrd::gprint("ca$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
-    $def[4]    .= rrd::line1("cb$key", rrd::color($key+2), ereg_replace(".*_","",$a['MACRO']['SERVICEDESC']).'-used');
-    $def[4]    .= rrd::gprint("cb$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
-}
+$def[4]    .= rrd::def("a$key" ,$RRDFILE[1], $DS[1], "AVERAGE");
+$def[4]    .= rrd::def("b$key" ,$RRDFILE[1], $DS[2], "AVERAGE");
+$def[4]    .= rrd::cdef("ca$key", "a$key,1024,/");
+$def[4]    .= rrd::cdef("cb$key", "b$key,1024,/");
+$def[4]    .= rrd::line2("ca$key", rrd::color($key+2), 'Total');
+$def[4]    .= rrd::gprint("ca$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
+$def[4]    .= rrd::line1("cb$key", rrd::color($key+2), 'Used');
+$def[4]    .= rrd::gprint("cb$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
 
 ?>
