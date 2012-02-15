@@ -13,6 +13,7 @@ $color_list = array(
 
 $opt[0]     = "";
 $def[0]     = "";
+$myopt = "";
 
 #$ds_name[3] = " File Systems: " . preg_replace('/check_snmp_dsk_/', '', $NAGIOS_SERVICEDESC);
 #$opt[3]     = "--vertical-label \"Util(%)\" -l0 --title \"$ds_name[3] \" -u 100 ";
@@ -22,9 +23,11 @@ $def[0]     = "";
 #$def[3]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
 
 $ds_name[0] = " File Systems: " . preg_replace('/check_snmp_dsk_/', '', $NAGIOS_SERVICEDESC);
-$num = 100 / ( $MAX[1] * 1024 * 1024 ) ;
-$opt[0]     = " --vertical-label \" (bytes) \" -l0 --title \"$ds_name[0] \" ";
-$opt[0]    .= " --right-axis $num:0 --right-axis-label \"(%)\" --base 1024 ";
+if ( $MAX[1] ) {
+    $num = 100 / ( $MAX[1] * 1024 * 1024 ) ;
+    $myopt  .= " --right-axis $num:0 --right-axis-label \"(%)\" --base 1024 ";
+}
+$opt[0]     = " --vertical-label \" (bytes) \" -l0 --title \"$ds_name[0] \" " . $myopt ;
 $def[0]     = "";
 $def[0]    .= rrd::def("a$key" ,$RRDFILE[1], $DS[1], "AVERAGE");
 $def[0]    .= rrd::def("b$key" ,$RRDFILE[1], $DS[2], "AVERAGE");
