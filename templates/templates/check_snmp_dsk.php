@@ -33,6 +33,8 @@ $def[0]    .= rrd::cdef("cb$key", "b$key,1024,*,1024,*");
 #$def[0]    .= rrd::gprint("ca$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
 $def[0]    .= rrd::area("cb$key", $color_list[8], 'Used');
 $def[0]    .= rrd::gprint("cb$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
-$def[0]    .= rrd::line1("ca$key", $color_list[4], 'Total '.$MAX[1]."G");
+$num = number_format($MAX[1]/1024,2);
+$def[0]    .= rrd::line1("ca$key", $color_list[4], 'Total '.$num.'G');
+#$def[0]    .= rrd::gprint("ca$key", array("AVERAGE"), "%.2lf%s");
 
 ?>
