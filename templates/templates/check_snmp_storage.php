@@ -7,7 +7,7 @@ $opt[0] = "";
 
 $myopt = " --base=1024 ";
 
-if ($MAX[1] != "") {
+if ( $MAX[1] ) {
     $num = 100 / ( $MAX[1] * 1024 * 1024 );
     $myopt .= "--right-axis $num:0 --right-axis-label \"(%)\" --right-axis-format \"%.2lf\" ";
 } else {
@@ -20,8 +20,8 @@ if(preg_match("/memory/i", $NAME[1])) {
     $opt[0]    .= "--vertical-label \"(byte)\" --title \"$ds_name[0] (Used:$pct%) for $hostname\" " . $myopt ;
     $def[0]    .= rrd::def("cvar1", $RRDFILE[1], $DS[1], "AVERAGE");
     $def[0]    .= rrd::cdef("var1", "cvar1,1024,*,1024,*");
-    $def[0]    .= rrd::line2("var1", rrd::color(2), "Used(".$UNIT[1].") ") ;
-    $def[0]    .= rrd::gprint("cvar1", array("MIN", "AVERAGE", "MAX"), "%6.2lf");
+    $def[0]    .= rrd::line2("var1", rrd::color(2), "Used") ;
+    $def[0]    .= rrd::gprint("var1", array("MIN", "AVERAGE", "MAX"), "%6.2lf%s");
     $def[0]    .= rrd::comment("Total\: ".$MAX[1].$UNIT[1]."  ");
     if ($WARN[1] != "") {
         $warn = $WARN[1] * 1024 * 1024 ;
@@ -62,8 +62,8 @@ if(preg_match("/memory/i", $NAME[1])) {
     $opt[0]    .= "--vertical-label \"(byte)\" --title \"$ds_name[0] (Used:$pct%) for $hostname\" " . $myopt ;
     $def[0]    .= rrd::def("cvar1", $RRDFILE[1], $DS[1], "AVERAGE");
     $def[0]    .= rrd::cdef("var1", "cvar1,1024,*,1024,*");
-    $def[0]    .= rrd::line2("var1", rrd::color(3), "Used(MB)") ;
-    $def[0]    .= rrd::gprint("cvar1", array("MIN", "AVERAGE", "MAX"), "%6.2lf");
+    $def[0]    .= rrd::line2("var1", rrd::color(3), "Used") ;
+    $def[0]    .= rrd::gprint("var1", array("MIN", "AVERAGE", "MAX"), "%6.2lf%s");
     $def[0]    .= rrd::comment("Total\: ".$MAX[1].$UNIT[1]."  ");
     if ($WARN[1] != "") {
         $warn = $WARN[1] * 1024 * 1024 ;
