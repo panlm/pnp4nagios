@@ -19,7 +19,7 @@ $color_list = array(
 $this->MACRO['TITLE'] = "Instances On All ESX Servers"; 
 $this->MACRO['COMMENT'] = " ";
 
-$services = $this->tplGetServices("esx0[1-7]","check_esx3_server_instance");
+$services = $this->tplGetServices("esx0[3-7]","check_esx3_server_instance");
 
 #
 # The Name of this Datasource (ds)

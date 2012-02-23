@@ -7,8 +7,8 @@
 $this->MACRO['TITLE'] = "Memory Utilization for All ESX Servers"; 
 $this->MACRO['COMMENT'] = " ";
 
-$services  = $this->tplGetServices("esx0[1-7]","check_esx3_server_mem");
-$pod1  = $this->tplGetServices("esx0[1-5]","check_esx3_server_mem");
+$services  = $this->tplGetServices("esx0[3-7]","check_esx3_server_mem");
+$pod1  = $this->tplGetServices("esx0[3-5]","check_esx3_server_mem");
 $pod2  = $this->tplGetServices("esx0[6-7]","check_esx3_server_mem");
 
 #

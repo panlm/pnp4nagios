@@ -19,7 +19,7 @@ $color_list = array(
 $this->MACRO['TITLE'] = "CPU Utilization for All ESX Servers"; 
 $this->MACRO['COMMENT'] = " ";
 
-$services = $this->tplGetServices("esx0[1-7]","check_esx3_server_cpu");
+$services = $this->tplGetServices("esx0[3-7]","check_esx3_server_cpu");
 
 #
 # The Name of this Datasource (ds)

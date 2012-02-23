@@ -18,7 +18,7 @@ $color_list = array(
     8 => "#336633"  // darker green
 );
 
-$hosts = array('esx01', 'esx02', 'esx03', 'esx04', 'PS6000');
+$hosts = array('esx03', 'esx04', 'PS6000');
 
 $ds_name = array();
 $opt     = array();
@@ -35,12 +35,6 @@ foreach($hosts as $key=>$host){
     # get the data for a given Host/Service
     #$services = $this->tplGetServices($host,"check_snmp_net_detail_esx");
     switch ($host) {
-    case 'esx01':
-        $services = $this->tplGetServices('esx01','check_snmp_port_vmnic[02]');
-        break;
-    case 'esx02':
-        $services = $this->tplGetServices('esx02','check_snmp_port_vmnic[02]');
-        break;
     case 'esx03':
         $services = $this->tplGetServices('esx03','check_snmp_port_vmnic[02]');
         break;
