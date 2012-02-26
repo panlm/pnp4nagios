@@ -18,7 +18,7 @@ $color_list = array(
 $this->MACRO['TITLE'] = "CPU Utilization for ALL ESX Servers"; 
 $this->MACRO['COMMENT'] = " ";
 
-$myenvs = array("prod","mgmt");
+$myenvs = array("prod", "mgmt", "demo");
 $i = 0;
 
 foreach($myenvs as $key=>$myenv){
@@ -29,6 +29,9 @@ foreach($myenvs as $key=>$myenv){
     } else if ( $myenv == "mgmt" ) {
         $services = $this->tplGetServices("esxi1[1-9]","check_esxi_cpu");
         $string = "Management";
+    } else if ( $myenv == "demo" ) {
+        $services = $this->tplGetServices("esxi2[1-9]","check_esxi_cpu");
+        $string = "Demo";
     }
 
     #
