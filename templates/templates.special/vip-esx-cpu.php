@@ -37,11 +37,11 @@ foreach($myenvs as $key=>$myenv){
     #
     # The Name of this Datasource (ds)
     $ds_name[$i] = $string . " ESX Server CPU"; 
-    $opt[$i]     = "--vertical-label \"CPU Util (%)\" -l0 --title \"CPU Max Utilization for $string\" ";
+    $opt[$i]     = "--vertical-label \"CPU Util (%)\" -l0 --title \"CPU Max Utilization for $string\" -u 100 ";
     $def[$i]     = "";
 
     $ds_name[$i+1] = $string . " ESX Server CPU (STACKED GRAPH)"; 
-    $opt[$i+1]     = "--vertical-label \"CPU Util (%)\" -l0 --title \"CPU Max Utilization for $string (STACKED GRAPH)\" ";
+    $opt[$i+1]     = "--vertical-label \"CPU Util (%)\" -l0 --title \"CPU Max Utilization for $string (STACKED GRAPH)\" -u 200 ";
     $def[$i+1]     = "";
 
     $j = 1;
