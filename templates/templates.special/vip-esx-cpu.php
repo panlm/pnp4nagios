@@ -37,11 +37,11 @@ foreach($myenvs as $key=>$myenv){
     #
     # The Name of this Datasource (ds)
     $ds_name[$i] = $string . " ESX Server CPU"; 
-    $opt[$i]     = "--vertical-label \"CPU Util (%)\" -l0 --title \"CPU Max Utilization for $string\" -u 100 ";
+    $opt[$i]     = "--vertical-label \"CPU Util (%)\" -l0 --title \"CPU Utilization for $string\" -u 100 ";
     $def[$i]     = "";
 
     $ds_name[$i+1] = $string . " ESX Server CPU (STACKED GRAPH)"; 
-    $opt[$i+1]     = "--vertical-label \"CPU Util (%)\" -l0 --title \"CPU Max Utilization for $string (STACKED GRAPH)\" -u 200 ";
+    $opt[$i+1]     = "--vertical-label \"CPU Util (%)\" -l0 --title \"CPU Utilization for $string (STACKED GRAPH)\" -u 200 ";
     $def[$i+1]     = "";
 
     $j = 1;
@@ -54,12 +54,12 @@ foreach($myenvs as $key=>$myenv){
         # Just to get Infos about the Array Structure
         #
         #throw new Kohana_exception(print_r($a,TRUE));
-        $def[$i]      .= rrd::def("a$key" ,$a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "MAX");
+        $def[$i]      .= rrd::def("a$key" ,$a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "AVERAGE");
         $def[$i]      .= rrd::area("a$key", $color_list[$j]."32");
         $def[$i]      .= rrd::line1("a$key", $color_list[$j]."FF", $a['MACRO']['HOSTNAME']);
         $def[$i]      .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
 
-        $def[$i+1]    .= rrd::def("a$key" ,$a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "MAX");
+        $def[$i+1]    .= rrd::def("a$key" ,$a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "AVERAGE");
         $def[$i+1]    .= rrd::area("a$key", $color_list[$j]."FF", $a['MACRO']['HOSTNAME'], "STACK");
         $def[$i+1]    .= rrd::gprint("a$key", array("MIN", "AVERAGE", "MAX"), "%.2lf%s");
 
