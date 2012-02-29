@@ -2,6 +2,10 @@
 #
 # Copyright (c) 2006-2010 Joerg Linge (http://www.pnp4nagios.org)
 #
+#include("/usr/local/groundwork/pnp/share/templates/color.php");
+
+include("color.php");
+
 $def[0] = "";
 $opt[0] = "";
 
@@ -62,7 +66,7 @@ if(preg_match("/memory/i", $NAME[1])) {
     $opt[0]    .= "--vertical-label \"(byte)\" --title \"$ds_name[0] (Used:$pct%) for $hostname\" " . $myopt ;
     $def[0]    .= rrd::def("cvar1", $RRDFILE[1], $DS[1], "AVERAGE");
     $def[0]    .= rrd::cdef("var1", "cvar1,1024,*,1024,*");
-    $def[0]    .= rrd::line2("var1", rrd::color(3), "Used") ;
+    $def[0]    .= rrd::area("var1", $color_list[8], "Used") ;
     $def[0]    .= rrd::gprint("var1", array("MIN", "AVERAGE", "MAX"), "%6.2lf%s");
     $def[0]    .= rrd::comment("Total\: ".$MAX[1].$UNIT[1]."  ");
     if ($WARN[1] != "") {

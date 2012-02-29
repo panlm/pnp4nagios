@@ -3,16 +3,7 @@
 # Copyright (c) 2006-2010 Joerg Linge (http://www.pnp4nagios.org)
 #
 
-$color_list = array(
-    1 => "#ff77ee", // Purple
-    2 => "#fed409", // Yellow
-    3 => "#007dd0", // Blue
-    4 => "#ee0a04", // Red
-    5 => "#56a901", // Green
-    6 => "#ff6600", // Orange
-    7 => "#a4a4a4", // Grey
-    8 => "#336633"  // darker green
-);
+include('color.php');
 
 if(preg_match('/^ProcessorLoad$/', $NAME[1])) {
     $ds_name[0] = "Processor Load";
