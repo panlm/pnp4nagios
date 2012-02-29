@@ -1,6 +1,6 @@
 <?php
 
-include('color.php');
+require('color.php');
 
 $opt[0]     = "";
 $def[0]     = "";

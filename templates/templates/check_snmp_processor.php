@@ -3,7 +3,7 @@
 # Copyright (c) 2006-2010 Joerg Linge (http://www.pnp4nagios.org)
 #
 
-include('color.php');
+require('color.php');
 
 if(preg_match('/^ProcessorLoad$/', $NAME[1])) {
     $ds_name[0] = "Processor Load";

@@ -4,7 +4,7 @@
 #
 #include("/usr/local/groundwork/pnp/share/templates/color.php");
 
-include("color.php");
+require("color.php");
 
 $def[0] = "";
 $opt[0] = "";

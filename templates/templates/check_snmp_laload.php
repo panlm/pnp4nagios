@@ -4,7 +4,7 @@
 # Plugin: check_load
 #
 
-include('color.php');
+require('color.php');
 
 $ds_name[0] = "Average Load (laload)";
 $opt[0]     = "";
