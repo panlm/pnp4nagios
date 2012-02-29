@@ -1,5 +1,8 @@
 <?php
 
+#using the following line in your php files to include color_list array
+#require(dirname(__FILE__).'/../templates/color.php');
+
 $color_list = array(
     1 => "#ff77ee", // Purple
     2 => "#fed409", // Yellow
