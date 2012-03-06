@@ -1,12 +1,14 @@
 <?php
-#
+# include color
+require('color.php');
+
 # TCP Established
 $ds_name[0] = "TCP Established";
 $opt[0] = "--vertical-label \"\" -l0 --title \"$ds_name[0] for $hostname \" -Y ";
 
 $def[0] = rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
 
-$def[0] .= rrd::area("var1", rrd::color(3), "Estab") ;
+$def[0] .= rrd::line2("var1", $color_list[5], "Estab") ;
 $def[0] .= rrd::gprint("var1", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
 $def[0] .= rrd::comment(" ($servicedesc)\\r");
 
