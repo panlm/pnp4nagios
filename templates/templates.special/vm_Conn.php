@@ -16,16 +16,9 @@ $opt[0]     = "--vertical-label \"Connections\" -l0 --title \" \" --units-expone
 $def[0]     = "";
 
 foreach($services as $key=>$val){
-    #
-    # get the data for a given Host/Service
     $a = $this->tplGetData($val['host'],$val['service']);
-    #
-    # Throw an exception to debug the content of $a
-    # Just to get Infos about the Array Structure
-    #
-    #throw new Kohana_exception(print_r($a,TRUE));
     $def[0]    .= rrd::def("a$key" ,$a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "AVERAGE");
-    $def[0]    .= rrd::line2("a$key", rrd::color($key), $a['MACRO']['HOSTNAME']);
+    $def[0]    .= rrd::line2("a$key", rrd::color($key%56), $a['MACRO']['HOSTNAME']);
     $def[0]    .= rrd::gprint("a$key", array("LAST", "AVERAGE", "MAX"), "%.2lf%s");
 }
 
