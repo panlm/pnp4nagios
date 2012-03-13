@@ -4,7 +4,7 @@
 #
 #
 # Some Macros 
-$this->MACRO['TITLE'] = "All ISVs CPU Maximum Utilization Reports"; 
+$this->MACRO['TITLE'] = "All VMs CPU Maximum Utilization Reports"; 
 $this->MACRO['COMMENT'] = " ";
 
 $services = $this->tplGetServices("vm[0-9]+","check_snmp_cpu_detail");
