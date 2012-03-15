@@ -18,7 +18,7 @@ $def[0]     = "";
 foreach($services as $key=>$val){
     $a = $this->tplGetData($val['host'],$val['service']);
     $def[0]    .= rrd::def("a$key" ,$a['DS'][0]['RRDFILE'], $a['DS'][0]['DS'], "AVERAGE");
-    $def[0]    .= rrd::line2("a$key", rrd::color($key%56), $a['MACRO']['HOSTNAME']);
+    $def[0]    .= rrd::line2("a$key", rrd::color($key%20), $a['MACRO']['HOSTNAME']);
     $def[0]    .= rrd::gprint("a$key", array("LAST", "AVERAGE", "MAX"), "%.2lf");
 }
 
