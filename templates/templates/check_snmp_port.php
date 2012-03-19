@@ -12,9 +12,9 @@ $def[1] = rrd::def("var1", $RRDFILE[1], $DS[1], "AVERAGE");
 $def[1] .= rrd::def("var2", $RRDFILE[1], $DS[2], "AVERAGE");
 
 $def[1] .= rrd::line1("var1", "#CCCC33", "In") ;
-$def[1] .= rrd::gprint("var1", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
+$def[1] .= rrd::gprint("var1", array("LAST", "AVERAGE", "MAX"), "%6.2lf%s");
 $def[1] .= rrd::line1("var2", "#33FFFF", "Out") ;
-$def[1] .= rrd::gprint("var2", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
+$def[1] .= rrd::gprint("var2", array("LAST", "AVERAGE", "MAX"), "%6.2lf%s");
 $def[1] .= rrd::comment(" (NO STACKED GRAPH)\\r");
 
 #
@@ -62,9 +62,9 @@ $def[4] = rrd::def("var9", $RRDFILE[1], $DS[9], "AVERAGE");
 $def[4] .= rrd::def("var10", $RRDFILE[1], $DS[10], "AVERAGE");
 
 $def[4] .= rrd::area("var9", "#336666", "InPktPs") ;
-$def[4] .= rrd::gprint("var9", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
+$def[4] .= rrd::gprint("var9", array("LAST", "AVERAGE", "MAX"), "%6.2lf%s");
 $def[4] .= rrd::area("var10", "#339966", "OutPktPs", "STACK") ;
-$def[4] .= rrd::gprint("var10", array("LAST", "AVERAGE", "MAX"), "%6.2lf");
+$def[4] .= rrd::gprint("var10", array("LAST", "AVERAGE", "MAX"), "%6.2lf%s");
 $def[4] .= rrd::comment(" (STACKED GRAPH)\\r");
 
 ?>
