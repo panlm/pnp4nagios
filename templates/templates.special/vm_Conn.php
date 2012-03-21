@@ -12,7 +12,7 @@ $services = $this->tplGetServices("vm[0-9]+","check_snmp_conn");
 #
 # The Name of this Datasource (ds)
 $ds_name[0] = "Connections"; 
-$opt[0]     = "--vertical-label \"Connections\" -l0 --title \" \" --units-exponent=0 --base=1000 -h 1000 ";
+$opt[0]     = "--vertical-label \"Connections\" -l0 --title \" \" --units-exponent=0 --base=1000 -h 800 ";
 $def[0]     = "";
 
 foreach($services as $key=>$val){
