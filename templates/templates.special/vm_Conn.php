@@ -1,5 +1,4 @@
 <?php
-
 #
 # This is a very basic static Template
 #
