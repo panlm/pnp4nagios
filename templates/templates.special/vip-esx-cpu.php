@@ -9,7 +9,7 @@ require(dirname(__FILE__).'/../templates/color.php');
 $this->MACRO['TITLE'] = "CPU Utilization for ALL ESX Servers"; 
 $this->MACRO['COMMENT'] = " ";
 
-$myenvs = array("prod", "mgmt", "demo");
+$myenvs = array("prod", "test", "ccec", "vfdd");
 $i = 0;
 
 foreach($myenvs as $key=>$myenv){
@@ -17,12 +17,15 @@ foreach($myenvs as $key=>$myenv){
     if ( $myenv == "prod" ){
         $services = $this->tplGetServices("esxi0[1-9]","check_esxi_cpu");
         $string = "Production";
-    } else if ( $myenv == "mgmt" ) {
+    } else if ( $myenv == "test" ) {
         $services = $this->tplGetServices("esxi1[1-9]","check_esxi_cpu");
-        $string = "Management";
-    } else if ( $myenv == "demo" ) {
+        $string = "Testing";
+    } else if ( $myenv == "ccec" ) {
         $services = $this->tplGetServices("esxi2[1-9]","check_esxi_cpu");
-        $string = "Demo";
+        $string = "CCEC";
+    } else if ( $myenv == "vfdd" ) {
+        $services = $this->tplGetServices("esxi3[1-9]","check_esxi_cpu");
+        $string = "VFDD Beta";
     }
 
     #
