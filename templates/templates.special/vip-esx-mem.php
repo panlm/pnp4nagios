@@ -1,8 +1,4 @@
 <?php
-#
-# This is a very basic static Template
-#
-#
 
 require(dirname(__FILE__).'/../templates/color.php');
 
