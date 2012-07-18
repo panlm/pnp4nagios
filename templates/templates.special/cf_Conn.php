@@ -8,7 +8,7 @@
 $this->MACRO['TITLE'] = "All VMs Connections"; 
 $this->MACRO['COMMENT'] = " ";
 
-$services = $this->tplGetServices("vm[0-9]+","check_snmp_conn");
+$services = $this->tplGetServices("cf[0-9]+","check_snmp_conn");
 
 #
 # The Name of this Datasource (ds)
