@@ -1,0 +1,8 @@
+PKG_REL_DATE="11-21-2011"
+PKG_VERSION="0.6.16"
+PKG_NAME="pnp4nagios"
+
+#
+# Configure Arguments
+# ./configure  '--prefix=/usr/local/groundwork/pnp'
+#

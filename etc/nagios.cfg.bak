@@ -1,0 +1,335 @@
+##########GROUNDWORK#############################################################################################
+#GW
+#GW	nagios.cfg generated 2011-04-13 00:00:47 by admin from monarch.cgi nagios v 3.x
+#GW
+##########GROUNDWORK#############################################################################################
+
+# LOG FILE
+log_file=/usr/local/groundwork/nagios/var/nagios.log
+
+# OBJECT CONFIGURATION FILE(S)
+cfg_file=/usr/local/groundwork/nagios/etc/check_commands.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/contact_groups.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/contact_templates.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/contacts.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/escalation_templates.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/extended_host_info.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/extended_host_info_templates.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/extended_service_info.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/extended_service_info_templates.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/host_dependencies.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/host_escalations.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/host_templates.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/hostgroups.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/hosts.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/misccommands.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/service_dependencies.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/service_dependency_templates.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/service_escalations.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/service_groups.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/service_templates.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/services.cfg
+cfg_file=/usr/local/groundwork/nagios/etc/time_periods.cfg
+
+# OBJECT CACHE FILE
+object_cache_file=/usr/local/groundwork/nagios/var/objects.cache
+
+# RESOURCE FILE
+resource_file=/usr/local/groundwork/nagios/etc/resource.cfg
+
+# TEMP FILE
+temp_file=/usr/local/groundwork/nagios/var/nagios.tmp
+
+# STATUS FILE
+status_file=/usr/local/groundwork/nagios/var/status.log
+
+# STATUS UPDATE INTERVAL
+status_update_interval=15
+
+# NAGIOS USER
+nagios_user=nagios
+
+# NAGIOS GROUP
+nagios_group=nagios
+
+# ENABLE NOTIFICATIONS
+enable_notifications=0
+
+# EXECUTE SERVICE CHECKS
+execute_service_checks=1
+
+# ACCEPT PASSIVE SERVICE CHECKS
+accept_passive_service_checks=1
+
+# EXECUTE HOST CHECKS
+execute_host_checks=1
+
+# ACCEPT PASSIVE HOST CHECKS
+accept_passive_host_checks=1
+
+# ENABLE EVENT HANDLERS
+enable_event_handlers=1
+
+# LOG ROTATION METHOD
+log_rotation_method=d
+
+# LOG ARCHIVE PATH
+log_archive_path=/usr/local/groundwork/nagios/var/archives
+
+# CHECK EXTERNAL COMMANDS
+check_external_commands=1
+
+# COMMAND CHECK INTERVAL
+command_check_interval=-1
+
+# COMMAND FILE
+command_file=/usr/local/groundwork/nagios/var/spool/nagios.cmd
+
+# LOCK FILE
+lock_file=/usr/local/groundwork/nagios/var/nagios.lock
+
+# RETAIN STATE INFORMATION
+retain_state_information=1
+
+# STATE RETENTION FILE
+state_retention_file=/usr/local/groundwork/nagios/var/nagiosstatus.sav
+
+# RETENTION UPDATE INTERVAL
+retention_update_interval=60
+
+# USE RETAINED PROGRAM STATE
+use_retained_program_state=1
+
+# USE RETAINED SCHEDULING INFO
+use_retained_scheduling_info=1
+
+# USE SYSLOG
+use_syslog=0
+
+# LOG NOTIFICATIONS
+log_notifications=1
+
+# LOG SERVICE RETRIES
+log_service_retries=1
+
+# LOG HOST RETRIES
+log_host_retries=1
+
+# LOG EVENT HANDLERS
+log_event_handlers=1
+
+# LOG INITIAL STATES
+log_initial_states=0
+
+# LOG EXTERNAL COMMANDS
+log_external_commands=1
+
+# LOG PASSIVE CHECKS
+log_passive_checks=1
+
+# GLOBAL HOST EVENT HANDLER
+# global_host_event_handler=
+
+# GLOBAL SERVICE EVENT HANDLER
+# global_service_event_handler=
+
+# SLEEP TIME
+sleep_time=1
+
+# SERVICE INTER CHECK DELAY METHOD
+service_inter_check_delay_method=s
+
+# MAX SERVICE CHECK SPREAD
+max_service_check_spread=30
+
+# SERVICE INTERLEAVE FACTOR
+service_interleave_factor=s
+
+# MAX CONCURRENT CHECKS
+max_concurrent_checks=100
+
+# HOST INTER CHECK DELAY METHOD
+host_inter_check_delay_method=s
+
+# MAX HOST CHECK SPREAD
+max_host_check_spread=30
+
+# INTERVAL LENGTH
+interval_length=60
+
+# AUTO RESCHEDULE CHECKS
+auto_reschedule_checks=0
+
+# AUTO RESCHEDULING INTERVAL
+auto_rescheduling_interval=30
+
+# AUTO RESCHEDULING WINDOW
+auto_rescheduling_window=180
+
+# ENABLE FLAP DETECTION
+enable_flap_detection=0
+
+# LOW SERVICE FLAP THRESHOLD
+low_service_flap_threshold=25.0
+
+# HIGH SERVICE FLAP THRESHOLD
+high_service_flap_threshold=50.0
+
+# LOW HOST FLAP THRESHOLD
+low_host_flap_threshold=25.0
+
+# HIGH HOST FLAP THRESHOLD
+high_host_flap_threshold=50.0
+
+# SOFT STATE DEPENDENCIES
+# soft_state_dependencies=
+
+# SERVICE CHECK TIMEOUT
+service_check_timeout=60
+
+# HOST CHECK TIMEOUT
+host_check_timeout=30
+
+# EVENT HANDLER TIMEOUT
+event_handler_timeout=30
+
+# NOTIFICATION TIMEOUT
+notification_timeout=30
+
+# OCSP TIMEOUT
+ocsp_timeout=5
+
+# OCHP TIMEOUT
+ochp_timeout=5
+
+# PERFDATA TIMEOUT
+perfdata_timeout=60
+
+# OBSESS OVER SERVICES
+obsess_over_services=0
+
+# OCSP COMMAND
+# ocsp_command=
+
+# OBSESS OVER HOSTS
+obsess_over_hosts=0
+
+# OCHP COMMAND
+# ochp_command=
+
+# PROCESS PERFORMANCE DATA
+process_performance_data=1
+
+# HOST PERFDATA COMMAND
+# host_perfdata_command=
+
+# SERVICE PERFDATA COMMAND
+# service_perfdata_command=
+
+# HOST PERFDATA FILE
+# host_perfdata_file=
+
+# SERVICE PERFDATA FILE
+service_perfdata_file=/usr/local/groundwork/nagios/var/service-perfdata.dat
+
+# HOST PERFDATA FILE TEMPLATE
+# host_perfdata_file_template=
+
+# SERVICE PERFDATA FILE TEMPLATE
+service_perfdata_file_template=$LASTSERVICECHECK$\t$HOSTNAME$\t$SERVICEDESC$\t$SERVICEOUTPUT$\t$SERVICEPERFDATA$
+
+# HOST PERFDATA FILE MODE
+host_perfdata_file_mode=w
+
+# SERVICE PERFDATA FILE MODE
+service_perfdata_file_mode=a
+
+# HOST PERFDATA FILE PROCESSING INTERVAL
+# host_perfdata_file_processing_interval=
+
+# SERVICE PERFDATA FILE PROCESSING INTERVAL
+service_perfdata_file_processing_interval=300
+
+# HOST PERFDATA FILE PROCESSING COMMAND
+# host_perfdata_file_processing_command=
+
+# SERVICE PERFDATA FILE PROCESSING COMMAND
+service_perfdata_file_processing_command=launch_perfdata_process
+
+# CHECK FOR ORPHANED SERVICES
+check_for_orphaned_services=0
+
+# CHECK SERVICE FRESHNESS
+check_service_freshness=0
+
+# FRESHNESS CHECK INTERVAL
+freshness_check_interval=60
+
+# CHECK HOST FRESHNESS
+check_host_freshness=0
+
+# HOST FRESHNESS CHECK INTERVAL
+host_freshness_check_interval=60
+
+# EVENT BROKER OPTIONS
+event_broker_options=-1
+
+# BROKER MODULE
+broker_module=/usr/local/groundwork/common/lib/libbronx.so
+
+# DATE FORMAT
+date_format=us
+
+# ILLEGAL OBJECT NAME CHARS
+illegal_object_name_chars=`~!$%^&*|'"<>?,()'=
+
+# ILLEGAL MACRO OUTPUT CHARS
+illegal_macro_output_chars=`~$&|"<>
+
+# ADMIN EMAIL
+admin_email=nagios@localhost
+
+# ADMIN PAGER
+admin_pager=pagenagios@localhost
+
+# PRECACHED OBJECT FILE
+precached_object_file=/usr/local/groundwork/nagios/var/objects.precache
+
+# EXTERNAL COMMAND BUFFER SLOTS
+# external_command_buffer_slots=
+
+# USE LARGE INSTALLATION TWEAKS
+use_large_installation_tweaks=1
+
+# ENABLE ENVIRONMENT MACROS
+enable_environment_macros=0
+
+# CHECK RESULT REAPER FREQUENCY
+check_result_reaper_frequency=10
+
+# CHECK RESULT PATH
+check_result_path=/usr/local/groundwork/nagios/var/checkresults
+
+# MAX CHECK RESULT REAPER TIME
+# max_check_result_reaper_time=
+
+# MAX CHECK RESULT FILE AGE
+# max_check_result_file_age=
+
+# TRANSLATE PASSIVE HOST CHECKS
+translate_passive_host_checks=0
+
+# CACHED HOST CHECK HORIZON
+cached_host_check_horizon=15
+
+# CACHED SERVICE CHECK HORIZON
+cached_service_check_horizon=15
+
+# FREE CHILD PROCESS MEMORY
+free_child_process_memory=0
+
+# CHILD PROCESSES FORK TWICE
+child_processes_fork_twice=0
+
+# USE AGGRESSIVE HOST CHECKING
+use_aggressive_host_checking=0
